@@ -34,8 +34,6 @@
       <img src="images/logo.png" alt="Etta Systems" class="logo-img logo-img-dark"  />
     </a>
 
-    <nav class="nav-links" id="nav-links">${navLinksHTML}</nav>
-
     <div class="nav-actions">
       <button class="lang-btn" id="lang-btn" aria-label="Switch Language">
         <svg viewBox="0 0 24 24" fill="none">
@@ -53,7 +51,9 @@
     </div>
 
   </div>
-</header>`;
+</header>
+
+<nav class="nav-links" id="nav-links">${navLinksHTML}</nav>`;
 
   /* ── BUILD FOOTER ─────────────────────────────────────── */
   const FOOTER_HTML = `
@@ -209,7 +209,9 @@
   const scrollTopBtn = document.getElementById('scroll-top');
 
   window.addEventListener('scroll', () => {
-    navbar.classList.toggle('scrolled', window.scrollY > 60);
+    const scrolled = window.scrollY > 60;
+    navbar.classList.toggle('scrolled', scrolled);
+    navLinks.classList.toggle('scrolled', scrolled);
     scrollTopBtn.classList.toggle('show', window.scrollY > 400);
   }, { passive: true });
 
