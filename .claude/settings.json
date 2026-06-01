@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find /mnt/c/Users/mhdali/Desktop -name \"*.jpg\" -o -name \"*.png\" -o -name \"*.jpeg\" -o -name \"*.webp\" 2>/dev/null | head -30)",
+      "Read(//mnt/c/Users/mhdali/**)",
+      "Bash(find /mnt/c/Users/mhdali/Downloads -name \"*.jpg\" -o -name \"*.png\" -o -name \"*.jpeg\" -o -name \"*.webp\" 2>/dev/null | head -20)"
+    ]
+  }
+}
