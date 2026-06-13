@@ -440,7 +440,7 @@ body.ar .mvv-card:hover { transform:translateX(-4px); border-right-color:var(--t
   background:radial-gradient(circle,rgba(22,181,166,.07),transparent 70%);
   top:-200px; right:-200px; pointer-events:none;
 }
-.products-tabs { display:flex; gap:12px; justify-content:center; margin-bottom:48px; }
+.products-tabs { display:flex; gap:12px; justify-content:center; margin-bottom:48px; flex-wrap:wrap; }
 .tab-btn {
   padding: 12px 32px; border-radius:50px;
   font-size:.93rem; font-weight:600; color:var(--text-soft);
@@ -2120,7 +2120,7 @@ body.ar .ph-auth-badge { right: auto; left: 16px; }
 
 /* ── Responsive ── */
 @media (max-width: 900px) {
-  .ph-inner   { grid-template-columns: 1fr; padding-bottom: 80px; }
+  .ph-inner   { grid-template-columns: 1fr; padding-bottom: 96px; }
   .ph-content { text-align: center; }
   .ph-eyebrow, .ph-cta { margin-left: auto; margin-right: auto; }
   .ph-sub     { margin: 0 auto 32px; }
@@ -2487,18 +2487,18 @@ body.ar .story-hl:hover { transform: translateX(-4px); border-right-color: var(-
 .ch-card-4 { bottom: 8%; right: 0; animation: float1 5.2s ease-in-out infinite reverse; }
 
 /* Bottom wave */
-.ch-wave {
+.ch-wave, .ph-wave {
   position: absolute; bottom: -1px; left: 0; right: 0;
   height: 60px; pointer-events: none;
 }
-.ch-wave svg { width: 100%; height: 100%; }
+.ch-wave svg, .ph-wave svg { width: 100%; height: 100%; }
 
 /* ── RESPONSIVE ── */
 @media (max-width: 900px) {
-  .ch-inner { grid-template-columns: 1fr; padding-bottom: 80px; }
+  .ch-inner { grid-template-columns: 1fr; padding-bottom: 48px; }
   .ch-content { text-align: center; }
   .ch-eyebrow, .ch-actions { justify-content: center; }
-  .ch-sub { margin: 0 auto 32px; }
+  .ch-sub { margin: 0 auto 28px; max-width: 100%; }
   .ch-visual { height: 360px; }
   .ch-card { min-width: 160px; padding: 10px 14px; }
   .ch-card p { display: none; }
@@ -2506,14 +2506,55 @@ body.ar .story-hl:hover { transform: translateX(-4px); border-right-color: var(-
   .ch-stats-row { padding: 14px 18px; }
   .ch-mini-num { font-size: 1.4rem; }
 }
-@media (max-width: 600px) {
-  .company-hero { min-height: auto; padding-bottom: 60px; }
-  .ch-visual { height: 300px; }
-  .ch-card-2, .ch-card-4 { display: none; }
-  .ch-card-1 { left: 50%; transform: translateX(-50%); top: 2%; }
-  .ch-card-3 { left: 50%; transform: translateX(-50%); bottom: 2%; }
-  .ch-title { font-size: 2rem; }
-  .ch-stats-row { gap: 0; }
+@media (max-width: 640px) {
+  .company-hero { min-height: auto; padding-bottom: 40px; }
+  .ch-inner { padding: 48px 16px 32px; gap: 24px; }
+  .ch-title { font-size: clamp(1.7rem, 7vw, 2.2rem); }
+  .ch-sub   { font-size: .88rem; margin-bottom: 20px; }
+  .ch-actions { gap: 10px; }
+  .ch-actions .btn { flex: 1; text-align: center; justify-content: center; }
+  .ch-stats-row { padding: 12px 14px; gap: 0; }
+  .ch-mini-num  { font-size: 1.2rem; }
+  .ch-stats-divider { height: 28px; }
+
+  /* ── Visual: convert absolute floating cards → flex 2×2 grid ── */
+  .ch-visual {
+    height: auto !important;
+    display: flex; flex-wrap: wrap; justify-content: center;
+    gap: 10px; padding: 8px 0 4px;
+  }
+  /* Badge takes full row */
+  .ch-center {
+    position: relative !important;
+    top: auto !important; left: auto !important;
+    transform: none !important;
+    width: 100%; display: flex; justify-content: center;
+    margin: 8px 0 4px;
+  }
+  /* Hide decorative extras */
+  .ch-lines  { display: none !important; }
+  .ch-wave   { display: none !important; }
+  .ch-ring-2, .ch-ring-3 { display: none !important; }
+  .ch-ring-1 { width: 110px !important; height: 110px !important; animation: none; }
+  .ch-badge-circle { width: 100px !important; height: 100px !important; }
+  .ch-year   { font-size: 1.6rem !important; }
+
+  /* All 4 cards — half width, side by side (2×2) */
+  .ch-card {
+    position: relative !important;
+    top: auto !important; left: auto !important;
+    right: auto !important; bottom: auto !important;
+    animation: none !important; transform: none !important;
+    min-width: unset !important;
+    width: calc(50% - 5px);
+    padding: 10px 12px !important;
+    flex-direction: column; gap: 6px !important;
+  }
+  .ch-card-1, .ch-card-2,
+  .ch-card-3, .ch-card-4 { display: flex !important; }
+  .ch-card p   { display: block !important; font-size: .66rem !important; }
+  .ch-card h4  { font-size: .76rem !important; }
+  .ch-card-icon { width: 26px !important; height: 26px !important; }
 }
 
 /* ═══════════════════════════════════════════════════════
@@ -2926,6 +2967,69 @@ body.ar .ctp-submit:hover svg { transform:translateX(-4px); }
 }
 
 @media (max-width: 640px) {
+  /* ── PRODUCTS TABS ── */
+  .products-tabs { display: none; }        /* ph-cards in hero replace tabs on mobile */
+
+  /* ── PRODUCTS HERO ── */
+  .products-hero { min-height: auto; padding-bottom: 40px; }
+  .ph-inner  { padding: 48px 16px 32px; gap: 24px; }
+  .ph-title  { font-size: clamp(1.7rem, 7vw, 2.2rem); }
+  .ph-sub    { font-size: .88rem; margin-bottom: 16px; }
+  .ph-stats  { padding: 12px 14px; width: 100%; justify-content: center; }
+  .ph-stat   { padding: 0 14px; }
+  .ph-stat-num { font-size: 1.35rem; }
+  .ph-cta    { width: 100%; text-align: center; justify-content: center; }
+  .ph-auth-badge { display: none; }
+
+  /* ── Category cards: compact inside hero ── */
+  .ph-cards {
+    display: flex; flex-direction: row; gap: 10px; width: 100%;
+  }
+  .ph-cat-card {
+    flex: 1;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center;
+    padding: 20px 12px !important;
+    gap: 10px;
+    grid-template-columns: unset;
+    grid-template-rows: unset;
+  }
+  .ph-cat-card::before { display: none; }
+  .ph-cat-icon  { width: 44px; height: 44px; grid-column: unset; grid-row: unset; }
+  .ph-cat-body  { grid-column: unset; grid-row: unset; }
+  .ph-cat-body h3 { font-size: .92rem; margin-bottom: 0; }
+  .ph-cat-body p  { display: none; }
+  .ph-cat-meta    { display: none; }
+  .ph-cat-pills   { display: none; }
+
+  /* ── SERVICES HERO ── */
+  .services-hero { min-height: auto; padding-bottom: 40px; }
+  .sh-inner  { padding: 48px 16px 32px; gap: 24px; }
+  .sh-title  { font-size: clamp(1.7rem, 7vw, 2.2rem); }
+  .sh-sub    { font-size: .88rem; margin-bottom: 20px; }
+  .sh-visual { display: none; }            /* hide timeline on mobile */
+  .sh-service-pills { flex-direction: row; flex-wrap: wrap; justify-content: center; gap: 8px; margin-bottom: 20px; }
+  .sh-pill   { padding: 7px 14px; font-size: .76rem; }
+
+  /* ── PARTNERS HERO ── */
+  .partners-hero { min-height: auto; padding-bottom: 40px; }
+  .prh-inner { padding: 48px 16px 32px; }
+  .prh-title { font-size: clamp(1.7rem, 7vw, 2.2rem); }
+  .prh-sub   { font-size: .88rem; }
+  .prh-network-inner { width: 240px; height: 240px; }
+  .prh-stats { flex-wrap: wrap; justify-content: center; width: 100%; padding: 12px 16px; }
+  .prh-stat  { padding: 6px 12px; }
+  .prh-stat span  { font-size: 1.35rem; }
+
+  /* ── CONTACT HERO ── */
+  .contact-hero { min-height: auto; padding-bottom: 40px; }
+  .cth-inner { padding: 48px 16px 32px; }
+  .cth-title { font-size: clamp(1.7rem, 7vw, 2.2rem); }
+  .cth-sub   { font-size: .88rem; margin-bottom: 20px; }
+  .cth-quick { gap: 10px; }
+  .cth-qbtn  { font-size: .82rem; padding: 10px 14px; }
+
   /* ── New components: mobile adjustments ── */
 
   /* Home service cards — always show "Learn More" (no hover on touch) */
@@ -3018,6 +3122,17 @@ body.ar .ctp-submit:hover svg { transform:translateX(-4px); }
 }
 
 @media (max-width: 480px) {
+  /* ── Hero sections: very small screens ── */
+  .ph-inner, .sh-inner, .prh-inner, .cth-inner { padding: 40px 14px 48px; }
+  .ph-title, .sh-title  { font-size: clamp(1.5rem, 8vw, 2rem); }
+  .ph-stats  { gap: 0; }
+  .ph-stat   { padding: 0 10px; }
+  .ph-stat-num { font-size: 1.2rem; }
+  .prh-network-inner { width: 200px; height: 200px; }
+  .sh-pill   { font-size: .72rem; padding: 6px 12px; }
+  .sh-pill svg { width: 14px; height: 14px; }
+  .cth-qbtn  { padding: 9px 12px; font-size: .78rem; }
+
   /* ── New components: very small screens ── */
   .ctrl-card-img { height: 130px; }
   .ctrl-card-featured .ctrl-card-img { height: 150px; }
