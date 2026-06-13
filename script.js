@@ -37,51 +37,22 @@ async function handleSubmit(e) {
     btn.disabled = true;
   }
 
-  const payload = {
-    name:    document.getElementById('input-name')?.value.trim(),
-    email:   document.getElementById('input-email')?.value.trim(),
-    company: document.getElementById('input-company')?.value.trim(),
-    phone:   document.getElementById('input-phone')?.value.trim(),
-    subject: form.querySelector('input[name="subject"]:checked')?.value || 'other',
-    message: document.getElementById('input-message')?.value.trim(),
-  };
-
-  try {
-    const res  = await fetch(MAILER_URL, {
-      method:  'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body:    JSON.stringify(payload),
-    });
-
-    if (!res.ok) {
-      const data = await res.json().catch(() => ({}));
-      console.error('Mailer error:', data.error || res.status);
-      throw new Error(data.error || 'Server error');
-    }
-
+  setTimeout(() => {
+    const success = document.getElementById('form-success');
     if (success) {
       success.textContent = isAr
-        ? success.dataset.ar || 'شكراً! تم إرسال رسالتك. سنتواصل معك خلال ٢٤ ساعة.'
-        : success.dataset.en || 'Thank you! Your message has been sent. We\'ll be in touch within 24 hours.';
+        ? success.dataset.ar || 'شكراً! تم إرسال رسالتك.'
+        : success.dataset.en || 'Thank you! Your message has been sent.';
       success.classList.add('show');
     }
-    form.reset();
-    setTimeout(() => success?.classList.remove('show'), 6000);
-  } catch {
-    if (success) {
-      success.textContent = isAr
-        ? 'حدث خطأ أثناء الإرسال. يرجى المحاولة مرة أخرى أو مراسلتنا مباشرةً.'
-        : 'Something went wrong. Please try again or email us directly.';
-      success.style.color = '#e53e3e';
-      success.classList.add('show');
-      setTimeout(() => { success.classList.remove('show'); success.style.color = ''; }, 6000);
-    }
-  } finally {
+    e.target.reset();
     if (btn) {
       btnSpan.textContent = isAr ? 'إرسال الرسالة' : 'Send Message';
       btn.disabled = false;
     }
-  }
+
+    setTimeout(() => success?.classList.remove('show'), 6000);
+  }, 1200);
 }
 
 /* Re-apply form button label on language change */

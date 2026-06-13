@@ -518,10 +518,9 @@ body.ar .service-number { right:auto; left:24px; }
 .svc-card-img img {
   width: 100%; height: 100%;
   object-fit: cover;
+  object-position: center;
   display: block;
-  transition: transform 0.5s ease;
 }
-.service-card:hover .svc-card-img img { transform: scale(1.06); }
 .svc-card-img::after {
   content: '';
   position: absolute;
@@ -610,6 +609,16 @@ body.ar .partner-card-detail { text-align:right; }
   display:block; transition:transform .5s cubic-bezier(.4,0,.2,1);
 }
 .showcase-img-wrap:hover img { transform:scale(1.06); }
+.id-name-blur {
+  position: absolute;
+  top: 68%; left: 28%; right: 28%;
+  height: 13%;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border-radius: 4px;
+  pointer-events: none;
+  z-index: 2;
+}
 .showcase-overlay {
   position:absolute; bottom:0; left:0; right:0;
   padding:18px 22px;
@@ -1940,10 +1949,9 @@ body.ar .ctrl-card-num { right: auto; left: 24px; }
 .ctrl-card-img img {
   width: 100%; height: 100%;
   object-fit: cover;
+  object-position: center;
   display: block;
-  transition: transform 0.5s ease;
 }
-.ctrl-card:hover .ctrl-card-img img { transform: scale(1.06); }
 .ctrl-card-featured .ctrl-card-img { height: 220px; }
 
 /* Responsive */
