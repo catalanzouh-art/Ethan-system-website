@@ -1020,6 +1020,7 @@ body.ar .scroll-top { right:auto; left:32px; }
   position: absolute; left: 26px; right: 26px; bottom: 20px;
   width: calc(100% - 52px); height: 60px; pointer-events: none;
 }
+body.ar .hpc-line { transform: scaleX(-1); }
 .hpc-stats-strip {
   display: flex; align-items: center;
   padding: 16px 26px;
