@@ -24,7 +24,8 @@ document.querySelectorAll('.tab-btn').forEach(btn => {
 /* ─── CONTACT FORM ──────────────────────────────────────── */
 function handleSubmit(e) {
   e.preventDefault();
-  const btn = e.target.querySelector('button[type="submit"], .ctp-submit');
+  const form = e.target;
+  const btn  = form.querySelector('button[type="submit"], .ctp-submit');
   const isAr = window.ETTA?.isAr?.() || false;
 
   if (btn) {
@@ -33,23 +34,43 @@ function handleSubmit(e) {
     btn.disabled = true;
   }
 
-  setTimeout(() => {
+  const data = {
+    name:    form.querySelector('#input-name')?.value    || '',
+    email:   form.querySelector('#input-email')?.value   || '',
+    company: form.querySelector('#input-company')?.value || '',
+    phone:   form.querySelector('#input-phone')?.value   || '',
+    subject: form.querySelector('input[name="subject"]:checked')?.value || '',
+    message: form.querySelector('#input-message')?.value || '',
+  };
+
+  fetch('https://ettasystems.com/contact.php', {
+    method:  'POST',
+    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+    body:    JSON.stringify(data),
+  })
+  .then(res => {
     const success = document.getElementById('form-success');
-    if (success) {
-      success.textContent = isAr
-        ? success.dataset.ar || 'شكراً! تم إرسال رسالتك.'
-        : success.dataset.en || 'Thank you! Your message has been sent.';
-      success.classList.add('show');
+    if (res.ok) {
+      if (success) {
+        success.textContent = isAr
+          ? success.dataset.ar || 'شكراً! تم إرسال رسالتك.'
+          : success.dataset.en || 'Thank you! Your message has been sent.';
+        success.classList.add('show');
+        setTimeout(() => success.classList.remove('show'), 6000);
+      }
+      form.reset();
+    } else {
+      alert(isAr ? 'حدث خطأ، حاول مجدداً.' : 'Something went wrong. Please try again.');
     }
-    e.target.reset();
+  })
+  .catch(() => alert(isAr ? 'تعذر الإرسال، تحقق من اتصالك.' : 'Send failed. Check your connection.'))
+  .finally(() => {
     if (btn) {
       const span = btn.querySelector('span') || btn;
       span.textContent = isAr ? 'إرسال الرسالة' : 'Send Message';
       btn.disabled = false;
     }
-
-    setTimeout(() => success?.classList.remove('show'), 6000);
-  }, 1200);
+  });
 }
 
 /* Re-apply form button label on language change */
