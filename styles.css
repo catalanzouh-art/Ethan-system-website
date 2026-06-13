@@ -403,7 +403,14 @@ body.ar .about-img-bg { left:auto; right:-20px; transform:rotate(3deg); }
   padding: 22px 24px; display: flex; gap: 16px;
   align-items: flex-start;
   border-left: 4px solid transparent; transition: var(--tr);
+  position: relative; overflow: hidden;
 }
+.mvv-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--teal), var(--teal-light));
+  transform: scaleX(0); transform-origin: left; transition: var(--tr);
+}
+.mvv-card:hover::before { transform: scaleX(1); }
 .mvv-card:hover { border-left-color:var(--teal); background:var(--teal-pale); transform:translateX(4px); }
 body.ar .mvv-card { border-left:none; border-right:4px solid transparent; }
 body.ar .mvv-card:hover { transform:translateX(-4px); border-right-color:var(--teal); }
@@ -411,7 +418,7 @@ body.ar .mvv-card:hover { transform:translateX(-4px); border-right-color:var(--t
 .mvv-icon svg { width:100%; height:100%; }
 .mvv-card h3 { font-size:1rem; font-weight:700; color:var(--dark); margin-bottom:5px; }
 .mvv-card p  { font-size:.88rem; color:var(--text-soft); line-height:1.6; }
-.mvv-message { border-left-color:var(--teal-light) !important; background:linear-gradient(135deg,var(--teal-pale),rgba(76,199,137,.1)); }
+.mvv-message { background: var(--gray-light); }
 
 /* Values grid (Company page) */
 .values-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:20px; }
@@ -483,7 +490,8 @@ body.ar .mvv-card:hover { transform:translateX(-4px); border-right-color:var(--t
 .service-card-featured {
   background:linear-gradient(135deg,var(--dark),#1e3040); color:white;
 }
-.service-card-featured h3, .service-card-featured p { color:white; }
+.service-card.service-card-featured h3,
+.service-card.service-card-featured p { color:white; }
 .service-card-featured .service-features span { background:rgba(255,255,255,.1); color:rgba(255,255,255,.8); }
 .service-number {
   font-size:4rem; font-weight:800; color:rgba(22,181,166,.1);
@@ -498,6 +506,31 @@ body.ar .service-number { right:auto; left:24px; }
 .service-features span {
   background:var(--teal-pale); color:var(--teal);
   font-size:.74rem; font-weight:600; padding:4px 12px; border-radius:50px;
+}
+
+/* Service card images */
+.svc-card-img {
+  margin: -36px -28px 20px;
+  height: 190px;
+  overflow: hidden;
+  position: relative;
+}
+.svc-card-img img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+.service-card:hover .svc-card-img img { transform: scale(1.06); }
+.svc-card-img::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 70px;
+  background: linear-gradient(to bottom, transparent, #f5f8fa);
+}
+.service-card-featured .svc-card-img::after {
+  background: linear-gradient(to bottom, transparent, #333F4B);
 }
 
 /* Process steps (Services page) */
@@ -953,7 +986,16 @@ body.ar .scroll-top { right:auto; left:32px; }
   border: 1.5px solid transparent;
 }
 .hpc-chip-active { background: var(--teal-pale); color: var(--teal); border-color: rgba(22,181,166,.25); }
+.hpc-chip[data-industry] { cursor: pointer; user-select: none; transition: var(--tr); }
 .hpc-chip svg { width: 10px; height: 10px; }
+
+/* Industry chart panels */
+.hpc-panel { display: none; }
+.hpc-panel.hpc-panel-active { display: block; animation: hpcFadeIn .35s ease; }
+@keyframes hpcFadeIn {
+  from { opacity: 0; transform: translateY(3px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
 
 /* Chart */
 .hpc-chart { padding: 18px 26px 14px; position: relative; }
@@ -1041,7 +1083,7 @@ body.ar .hap-item:hover { transform: translateX(-4px); border-right-color: var(-
   border-color: transparent;
 }
 .home-svc-featured:hover { box-shadow: 0 20px 52px rgba(22,181,166,.25); }
-.home-svc-featured::before { transform: scaleX(1); }
+.home-svc-featured::before { transform: scaleX(0); }
 .home-svc-num {
   position: absolute; top: 18px; right: 22px;
   font-size: 3.5rem; font-weight: 800; color: rgba(22,181,166,.08);
@@ -1066,9 +1108,17 @@ body.ar .home-svc-num { right: auto; left: 22px; }
   padding: 3px 10px; border-radius: 20px;
 }
 .home-svc-tags-light span { color: rgba(255,255,255,.7); background: rgba(255,255,255,.1); border-color: rgba(255,255,255,.15); }
-.home-svc-link { font-size: .84rem; font-weight: 700; color: var(--teal); transition: var(--tr); }
-.home-svc-link:hover { letter-spacing: .02em; }
-.home-svc-link-light { color: var(--teal-light); }
+.home-svc-link {
+  font-size: .84rem; font-weight: 700; color: var(--teal);
+  opacity: 0; visibility: hidden; transform: translateY(6px);
+  transition: opacity .3s ease, visibility .3s ease, transform .3s ease, letter-spacing .3s ease;
+  margin-top: auto;
+}
+.home-svc-card:hover .home-svc-link {
+  opacity: 1; visibility: visible; transform: translateY(0);
+}
+.home-svc-link:hover { letter-spacing: .04em; }
+.home-svc-link-light { color: rgba(255,255,255,.9); }
 
 /* ── Partners Marquee ── */
 .home-partners-section { background: white; padding: 80px 0 60px; overflow: hidden; }
@@ -1881,6 +1931,21 @@ body.ar .ctrl-card-num { right: auto; left: 24px; }
 .ctrl-card-featured .ctrl-desc { max-width: 700px; }
 .ctrl-card-featured .ctrl-card-head { max-width: 500px; }
 
+/* Product images in cards */
+.ctrl-card-img {
+  margin: -28px -28px 0;
+  height: 185px;
+  overflow: hidden;
+}
+.ctrl-card-img img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+.ctrl-card:hover .ctrl-card-img img { transform: scale(1.06); }
+.ctrl-card-featured .ctrl-card-img { height: 220px; }
+
 /* Responsive */
 @media (max-width: 860px) {
   .ctrl-grid   { grid-template-columns: 1fr; }
@@ -2132,6 +2197,9 @@ body.ar .ph-auth-badge { right: auto; left: 16px; }
   color: var(--teal);
   border-color: rgba(22,181,166,.3);
 }
+.story-chip[data-industry] { cursor: pointer; user-select: none; }
+.story-chip[data-industry]:hover svg path,
+.story-chip-active svg path { fill: var(--teal); }
 
 /* Growth chart */
 .story-chart {
@@ -2144,18 +2212,18 @@ body.ar .ph-auth-badge { right: auto; left: 16px; }
 }
 .story-chart-bars {
   display: flex; align-items: flex-end; gap: 8px;
-  height: 72px; position: relative; z-index: 1;
+  height: 60px; position: relative; z-index: 1;
 }
 .story-bar {
-  flex: 1; height: var(--h);
-  background: linear-gradient(180deg, rgba(22,181,166,.2), rgba(22,181,166,.05));
-  border-radius: 6px 6px 0 0;
+  flex: 1;
+  background: linear-gradient(180deg, rgba(22,181,166,.18), rgba(22,181,166,.04));
+  border-radius: 5px 5px 0 0;
   position: relative;
-  border-top: 2px solid rgba(22,181,166,.3);
-  transition: height .8s cubic-bezier(.4,0,.2,1);
+  border-top: 2px solid rgba(22,181,166,.25);
+  transition: height .7s cubic-bezier(.4,0,.2,1);
 }
 .story-bar-active {
-  background: linear-gradient(180deg, var(--teal), rgba(22,181,166,.15));
+  background: linear-gradient(180deg, var(--teal), rgba(22,181,166,.12));
   border-top-color: var(--teal);
 }
 .story-bar span {
@@ -2858,6 +2926,40 @@ body.ar .ctp-submit:hover svg { transform:translateX(-4px); }
 }
 
 @media (max-width: 640px) {
+  /* ── New components: mobile adjustments ── */
+
+  /* Home service cards — always show "Learn More" (no hover on touch) */
+  .home-svc-link { opacity: 1; visibility: visible; transform: translateY(0); }
+
+  /* Home service grid — full width */
+  .home-svc-grid { max-width: 100%; }
+
+  /* MVV cards — always show top bar, disable slide on touch */
+  .mvv-card::before { transform: scaleX(1); }
+  .mvv-card:hover { transform: none; }
+  body.ar .mvv-card:hover { transform: none; }
+
+  /* Product card images */
+  .ctrl-card-img { height: 150px; }
+  .ctrl-card-featured .ctrl-card-img { height: 170px; }
+
+  /* Service card images */
+  .svc-card-img { height: 155px; }
+
+  /* Story card (company page) — compact */
+  .story-industries { padding: 14px 18px 10px; gap: 6px; }
+  .story-chip { font-size: .7rem; padding: 4px 10px; }
+  .story-chart { padding: 14px 18px 20px; }
+  .story-chart-bars { height: 52px; }
+  .story-bar span { font-size: .55rem; bottom: -16px; }
+  .story-card-stats { padding: 14px 18px; }
+
+  /* Home profile card (index page) — compact */
+  .hpc-industries { padding: 12px 18px 10px; gap: 5px; }
+  .hpc-chip { font-size: .68rem; padding: 3px 10px; }
+  .hpc-chart { padding: 14px 18px 12px; }
+  .hpc-stats-strip { padding: 12px 18px; }
+
   .section  { padding:60px 0; }
   .container { padding:0 16px; }
   .section-header { margin-bottom:36px; }
@@ -2916,6 +3018,13 @@ body.ar .ctp-submit:hover svg { transform:translateX(-4px); }
 }
 
 @media (max-width: 480px) {
+  /* ── New components: very small screens ── */
+  .ctrl-card-img { height: 130px; }
+  .ctrl-card-featured .ctrl-card-img { height: 150px; }
+  .svc-card-img { height: 130px; }
+  .story-chip { font-size: .65rem; padding: 3px 8px; }
+  .hpc-chip   { font-size: .63rem; padding: 3px 8px; }
+
   .section  { padding:52px 0; }
   .container { padding:0 14px; }
   .hero     { min-height: auto; padding:80px 0 40px; }

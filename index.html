@@ -133,30 +133,59 @@
           <span class="hpc-badge" data-en="Est. 1999" data-ar="تأسست ١٩٩٩">Est. 1999</span>
         </div>
         <div class="hpc-industries">
-          <span class="hpc-chip hpc-chip-active">
+          <span class="hpc-chip hpc-chip-active" data-industry="pharma">
             <svg viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" fill="#16B5A6" opacity=".3"/><circle cx="6" cy="6" r="2.5" fill="#16B5A6"/></svg>
             <span data-en="Pharmaceutical" data-ar="الأدوية">Pharmaceutical</span>
           </span>
-          <span class="hpc-chip">
+          <span class="hpc-chip" data-industry="food">
             <svg viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" fill="#4CC789" opacity=".3"/><circle cx="6" cy="6" r="2.5" fill="#4CC789"/></svg>
             <span data-en="Food & Beverage" data-ar="الغذاء والمشروبات">Food & Beverage</span>
           </span>
-          <span class="hpc-chip">
+          <span class="hpc-chip" data-industry="chemical">
             <svg viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" fill="#16B5A6" opacity=".3"/><circle cx="6" cy="6" r="2.5" fill="#16B5A6"/></svg>
             <span data-en="Chemical" data-ar="الكيمياء">Chemical</span>
           </span>
         </div>
         <!-- Mini chart -->
         <div class="hpc-chart">
-          <div class="hpc-chart-title" data-en="Growth since 1999" data-ar="النمو منذ ١٩٩٩">Growth since 1999</div>
-          <div class="hpc-bars">
-            <div class="hpc-bar" style="--bh:30%"></div>
-            <div class="hpc-bar" style="--bh:45%"></div>
-            <div class="hpc-bar" style="--bh:58%"></div>
-            <div class="hpc-bar" style="--bh:70%"></div>
-            <div class="hpc-bar" style="--bh:82%"></div>
-            <div class="hpc-bar hpc-bar-active" style="--bh:100%"></div>
+          <div class="hpc-chart-title" id="hpc-chart-label">Pharma Growth</div>
+
+          <!-- Pharma panel -->
+          <div class="hpc-panel hpc-panel-active" id="hpc-pharma">
+            <div class="hpc-bars">
+              <div class="hpc-bar" style="height:30%"></div>
+              <div class="hpc-bar" style="height:45%"></div>
+              <div class="hpc-bar" style="height:58%"></div>
+              <div class="hpc-bar" style="height:70%"></div>
+              <div class="hpc-bar" style="height:82%"></div>
+              <div class="hpc-bar hpc-bar-active" style="height:100%"></div>
+            </div>
           </div>
+
+          <!-- Food & Beverage panel -->
+          <div class="hpc-panel" id="hpc-food">
+            <div class="hpc-bars">
+              <div class="hpc-bar" style="height:20%"></div>
+              <div class="hpc-bar" style="height:35%"></div>
+              <div class="hpc-bar" style="height:50%"></div>
+              <div class="hpc-bar" style="height:64%"></div>
+              <div class="hpc-bar" style="height:80%"></div>
+              <div class="hpc-bar hpc-bar-active" style="height:100%"></div>
+            </div>
+          </div>
+
+          <!-- Chemical panel -->
+          <div class="hpc-panel" id="hpc-chemical">
+            <div class="hpc-bars">
+              <div class="hpc-bar" style="height:35%"></div>
+              <div class="hpc-bar" style="height:48%"></div>
+              <div class="hpc-bar" style="height:62%"></div>
+              <div class="hpc-bar" style="height:75%"></div>
+              <div class="hpc-bar" style="height:87%"></div>
+              <div class="hpc-bar hpc-bar-active" style="height:100%"></div>
+            </div>
+          </div>
+
           <svg class="hpc-line" viewBox="0 0 260 60" fill="none" preserveAspectRatio="none">
             <path d="M0 58 C40 50,70 46,110 38 C150 30,190 22,260 6" stroke="url(#hpcGrad)" stroke-width="2.5" stroke-linecap="round" fill="none"/>
             <defs><linearGradient id="hpcGrad" x1="0" y1="0" x2="260" y2="0" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#4CC789" stop-opacity=".5"/><stop offset="100%" stop-color="#16B5A6"/></linearGradient></defs>

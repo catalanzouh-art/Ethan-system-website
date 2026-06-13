@@ -73,6 +73,100 @@ document.addEventListener('langchange', ({ detail: { lang } }) => {
   });
 });
 
+/* ─── HOME INDUSTRY CHIPS (index.html) ──────────────────── */
+(function initHomeChips() {
+  const chips = document.querySelectorAll('.hpc-chip[data-industry]');
+  const label = document.getElementById('hpc-chart-label');
+  if (!chips.length) return;
+
+  const labels = {
+    pharma:   { en: 'Pharma Growth',    ar: 'نمو القطاع الدوائي' },
+    food:     { en: 'F&B Growth',       ar: 'نمو الغذاء والمشروبات' },
+    chemical: { en: 'Chemical Growth',  ar: 'نمو القطاع الكيميائي' }
+  };
+
+  function activate(key) {
+    chips.forEach(c => c.classList.toggle('hpc-chip-active', c.dataset.industry === key));
+    if (label && labels[key]) {
+      label.textContent = document.body.classList.contains('ar') ? labels[key].ar : labels[key].en;
+    }
+    document.querySelectorAll('.hpc-panel').forEach(p =>
+      p.classList.toggle('hpc-panel-active', p.id === 'hpc-' + key)
+    );
+  }
+
+  chips.forEach(chip => chip.addEventListener('click', () => activate(chip.dataset.industry)));
+})();
+
+/* ─── INDUSTRY CHART (company.html) ─────────────────────── */
+(function initIndustryChart() {
+  const chips     = document.querySelectorAll('.story-chip[data-industry]');
+  const container = document.getElementById('industry-bars');
+  const label     = document.getElementById('chart-label');
+  if (!chips.length || !container) return;
+
+  const years = ['1999','2004','2009','2014','2019','2025'];
+
+  const datasets = {
+    pharma:   { en:'Pharma Growth',   ar:'نمو القطاع الدوائي',    h:[35,48,56,68,78,100] },
+    food:     { en:'F&B Growth',      ar:'نمو الغذاء والمشروبات', h:[28,40,54,65,80,100] },
+    chemical: { en:'Chemical Growth', ar:'نمو القطاع الكيميائي',  h:[38,50,60,72,84,100] }
+  };
+
+  /* Build bars once */
+  const bars = years.map((yr, i) => {
+    const bar  = document.createElement('div');
+    const isLast = i === years.length - 1;
+    bar.className = 'story-bar' + (isLast ? ' story-bar-active' : '');
+    bar.style.cssText = 'height:0%;transition:height .7s cubic-bezier(.4,0,.2,1)';
+    const span = document.createElement('span');
+    span.textContent = yr;
+    bar.appendChild(span);
+    container.appendChild(bar);
+    return bar;
+  });
+
+  function activate(key) {
+    const entry = datasets[key];
+    if (!entry) return;
+    if (label) {
+      label.dataset.en  = entry.en;
+      label.dataset.ar  = entry.ar;
+      label.textContent = document.body.classList.contains('ar') ? entry.ar : entry.en;
+    }
+    bars.forEach((bar, i) => {
+      bar.style.height = entry.h[i] + '%';
+      bar.classList.toggle('story-bar-active', i === bars.length - 1);
+    });
+    chips.forEach(c => c.classList.toggle('story-chip-active', c.dataset.industry === key));
+  }
+
+  function deactivate() {
+    chips.forEach(c => c.classList.remove('story-chip-active'));
+    bars.forEach(bar => { bar.style.height = '0%'; });
+    if (label) label.textContent = '';
+  }
+
+  const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
+  if (isTouch) {
+    /* On touch devices: tap to toggle */
+    chips.forEach(chip => {
+      chip.addEventListener('click', () => {
+        const already = chip.classList.contains('story-chip-active');
+        deactivate();
+        if (!already) activate(chip.dataset.industry);
+      });
+    });
+  } else {
+    /* On desktop: hover to show */
+    chips.forEach(chip => {
+      chip.addEventListener('mouseenter', () => activate(chip.dataset.industry));
+      chip.addEventListener('mouseleave', deactivate);
+    });
+  }
+})();
+
 /* ─── COUNTER ANIMATION (index.html stats) ─────────────── */
 (function initCounters() {
   const statObs = new IntersectionObserver(entries => {

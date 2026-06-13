@@ -193,31 +193,24 @@
 
         <!-- Industry chips -->
         <div class="story-industries">
-          <span class="story-chip story-chip-active">
-            <svg viewBox="0 0 16 16" fill="none"><path d="M8 2l1.5 4.5H14l-3.7 2.7 1.4 4.3L8 11l-3.7 2.5 1.4-4.3L2 6.5h4.5z" fill="#16B5A6"/></svg>
+          <span class="story-chip" data-industry="pharma">
+            <svg viewBox="0 0 16 16" fill="none"><path d="M8 2l1.5 4.5H14l-3.7 2.7 1.4 4.3L8 11l-3.7 2.5 1.4-4.3L2 6.5h4.5z" fill="currentColor"/></svg>
             <span data-en="Pharmaceutical" data-ar="الأدوية">Pharmaceutical</span>
           </span>
-          <span class="story-chip">
-            <svg viewBox="0 0 16 16" fill="none"><path d="M8 2l1.5 4.5H14l-3.7 2.7 1.4 4.3L8 11l-3.7 2.5 1.4-4.3L2 6.5h4.5z" fill="#4CC789"/></svg>
+          <span class="story-chip" data-industry="food">
+            <svg viewBox="0 0 16 16" fill="none"><path d="M8 2l1.5 4.5H14l-3.7 2.7 1.4 4.3L8 11l-3.7 2.5 1.4-4.3L2 6.5h4.5z" fill="currentColor"/></svg>
             <span data-en="Food & Beverage" data-ar="الغذاء والمشروبات">Food & Beverage</span>
           </span>
-          <span class="story-chip">
-            <svg viewBox="0 0 16 16" fill="none"><path d="M8 2l1.5 4.5H14l-3.7 2.7 1.4 4.3L8 11l-3.7 2.5 1.4-4.3L2 6.5h4.5z" fill="#16B5A6"/></svg>
+          <span class="story-chip" data-industry="chemical">
+            <svg viewBox="0 0 16 16" fill="none"><path d="M8 2l1.5 4.5H14l-3.7 2.7 1.4 4.3L8 11l-3.7 2.5 1.4-4.3L2 6.5h4.5z" fill="currentColor"/></svg>
             <span data-en="Chemical" data-ar="الكيمياء">Chemical</span>
           </span>
         </div>
 
         <!-- Growth chart -->
         <div class="story-chart">
-          <div class="story-chart-label" data-en="Growth Timeline" data-ar="خط النمو">Growth Timeline</div>
-          <div class="story-chart-bars">
-            <div class="story-bar" style="--h:35%"><span>1999</span></div>
-            <div class="story-bar" style="--h:48%"><span>2004</span></div>
-            <div class="story-bar" style="--h:56%"><span>2009</span></div>
-            <div class="story-bar" style="--h:68%"><span>2014</span></div>
-            <div class="story-bar" style="--h:78%"><span>2019</span></div>
-            <div class="story-bar story-bar-active" style="--h:100%"><span>2025</span></div>
-          </div>
+          <div class="story-chart-label" id="chart-label" data-en="Pharma Growth" data-ar="نمو القطاع الدوائي">Pharma Growth</div>
+          <div class="story-chart-bars" id="industry-bars"></div>
           <svg class="story-chart-line" viewBox="0 0 300 80" fill="none">
             <path d="M0 72 C50 60, 80 55, 120 45 C160 35, 200 28, 250 15 L300 8"
                   stroke="url(#lineGrad)" stroke-width="2.5" stroke-linecap="round" fill="none"/>
@@ -341,9 +334,9 @@
         </div>
         <div>
           <h3 data-en="Our Mission" data-ar="مهمتنا">Our Mission</h3>
-          <p data-en="To provide equipment for pharmaceutical, F&B and chemical industries, high-tech solutions and consultancies that empower our clients to reach their highest potential."
-             data-ar="تزويد صناعات الأدوية والغذاء والمشروبات والكيمياء بالمعدات والحلول التقنية المتطورة والاستشارات التي تُمكّن عملاءنا من تحقيق أعلى إمكاناتهم.">
-            To provide equipment for pharmaceutical, F&B and chemical industries, high-tech solutions and consultancies that empower our clients to reach their highest potential.
+          <p data-en="To provide equipment for pharmaceutical, F&amp;B and chemical industries, high-tech solutions and consultancies."
+             data-ar="تزويد صناعات الأدوية والغذاء والمشروبات والكيمياء بالمعدات والحلول التقنية المتطورة والاستشارات.">
+            To provide equipment for pharmaceutical, F&amp;B and chemical industries, high-tech solutions and consultancies.
           </p>
         </div>
       </div>
@@ -353,9 +346,9 @@
         </div>
         <div>
           <h3 data-en="Our Vision" data-ar="رؤيتنا">Our Vision</h3>
-          <p data-en="To be one of the key players in the MENA area in providing integrated solutions for industrial applications, recognized for our reliability, expertise and commitment to excellence."
-             data-ar="أن نكون أحد الشركاء الرئيسيين في منطقة الشرق الأوسط وشمال أفريقيا في تقديم الحلول المتكاملة للتطبيقات الصناعية، معروفين بموثوقيتنا وخبرتنا والتزامنا بالتميز.">
-            To be one of the key players in the MENA area in providing integrated solutions for industrial applications, recognized for our reliability, expertise and commitment to excellence.
+          <p data-en="To be one of the key players in the MENA area in providing integrated solutions for industrial applications."
+             data-ar="أن نكون أحد الشركاء الرئيسيين في منطقة الشرق الأوسط وشمال أفريقيا في تقديم الحلول المتكاملة للتطبيقات الصناعية.">
+            To be one of the key players in the MENA area in providing integrated solutions for industrial applications.
           </p>
         </div>
       </div>
@@ -365,9 +358,9 @@
         </div>
         <div>
           <h3 data-en="Our Message" data-ar="رسالتنا">Our Message</h3>
-          <p data-en="ETTA SYSTEMS is your trusted partner of success. We stand beside you at every step — from selecting the right equipment to ensuring full regulatory compliance."
-             data-ar="ETTA SYSTEMS هي شريكك الموثوق للنجاح. نقف إلى جانبك في كل خطوة — من اختيار المعدات المناسبة إلى ضمان الامتثال التنظيمي الكامل.">
-            ETTA SYSTEMS is your trusted partner of success. We stand beside you at every step — from selecting the right equipment to ensuring full regulatory compliance.
+          <p data-en="ETTA SYSTEMS is your trusted partner of success."
+             data-ar="ETTA SYSTEMS هي شريكك الموثوق للنجاح.">
+            ETTA SYSTEMS is your trusted partner of success.
           </p>
         </div>
       </div>
