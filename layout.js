@@ -118,7 +118,7 @@
             </a>
             <a href="tel:+963933525517" class="footer-contact-item">
               <svg viewBox="0 0 18 18" fill="none"><path d="M5 3.5c-.3 0-.5.2-.5.5v.5C4.5 8.7 9.3 13.5 13.5 13.5h.5c.3 0 .5-.2.5-.5v-2a.5.5 0 0 0-.5-.5h-2a.5.5 0 0 0-.5.5v.5c-.9-.4-1.9-1.1-2.7-1.9-.8-.8-1.5-1.8-1.9-2.7h.5c.3 0 .5-.2.5-.5v-2a.5.5 0 0 0-.5-.5H5z" fill="#16B5A6" opacity=".7"/></svg>
-              <span dir="ltr">+963933525517</span>
+              <span dir="ltr">+963 933525517</span>
             </a>
             <a href="mailto:ncatalan@ettasystems.com" class="footer-contact-item">
               <svg viewBox="0 0 18 18" fill="none"><rect x="1.5" y="3.5" width="15" height="11" rx="2" stroke="#16B5A6" stroke-width="1.2" opacity=".7"/><path d="M1.5 6l7.5 5 7.5-5" stroke="#16B5A6" stroke-width="1.2" opacity=".7"/></svg>
