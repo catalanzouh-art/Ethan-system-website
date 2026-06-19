@@ -100,22 +100,44 @@ document.addEventListener('langchange', ({ detail: { lang } }) => {
   const label = document.getElementById('hpc-chart-label');
   if (!chips.length) return;
 
-  const labels = {
-    pharma:   { en: 'Pharma Growth',    ar: 'نمو القطاع الدوائي' },
-    food:     { en: 'F&B Growth',       ar: 'نمو الغذاء والمشروبات' },
-    chemical: { en: 'Chemical Growth',  ar: 'نمو القطاع الكيميائي' }
+  const datasets = {
+    // Pharma MENA: ~$3B(1999) → $55B(2025) — slow start, sharp post-2009 rise
+    pharma:   { en: 'Pharma Growth — MENA',   ar: 'نمو قطاع الأدوية في المنطقة',       h: [6,11,22,40,62,100] },
+    // F&B MENA: mature market, consistent growth ~$80B → $220B
+    food:     { en: 'F&B Growth — MENA',       ar: 'نمو قطاع الغذاء في المنطقة',         h: [25,35,48,62,78,100] },
+    // Chemical MENA: petrochemical base, steady industrial growth
+    chemical: { en: 'Chemical Growth — MENA',  ar: 'نمو القطاع الكيميائي في المنطقة',    h: [18,28,42,58,76,100] }
   };
 
+  const lineEls = {
+    pharma:   document.getElementById('hpc-lp'),
+    food:     document.getElementById('hpc-lf'),
+    chemical: document.getElementById('hpc-lc'),
+  };
+
+  const bars = Array.from(document.querySelectorAll('#hpc-bars .hpc-bar'));
+
   function activate(key) {
+    const d = datasets[key];
+    if (!d) return;
+
     chips.forEach(c => c.classList.toggle('hpc-chip-active', c.dataset.industry === key));
-    if (label && labels[key]) {
-      label.textContent = document.body.classList.contains('ar') ? labels[key].ar : labels[key].en;
-    }
-    document.querySelectorAll('.hpc-panel').forEach(p =>
-      p.classList.toggle('hpc-panel-active', p.id === 'hpc-' + key)
-    );
+
+    if (label) label.textContent = document.body.classList.contains('ar') ? d.ar : d.en;
+
+    bars.forEach((bar, i) => {
+      bar.style.height = d.h[i] + '%';
+      bar.classList.toggle('hpc-bar-active', i === bars.length - 1);
+    });
+
+    Object.entries(lineEls).forEach(([k, el]) => {
+      if (!el) return;
+      el.classList.remove('hpc-iline-active', 'hpc-iline-dim');
+      el.classList.add(k === key ? 'hpc-iline-active' : 'hpc-iline-dim');
+    });
   }
 
+  activate('pharma');
   chips.forEach(chip => chip.addEventListener('click', () => activate(chip.dataset.industry)));
 })();
 
@@ -129,9 +151,15 @@ document.addEventListener('langchange', ({ detail: { lang } }) => {
   const years = ['1999','2004','2009','2014','2019','2025'];
 
   const datasets = {
-    pharma:   { en:'Pharma Growth',   ar:'نمو القطاع الدوائي',    h:[35,48,56,68,78,100] },
-    food:     { en:'F&B Growth',      ar:'نمو الغذاء والمشروبات', h:[28,40,54,65,80,100] },
-    chemical: { en:'Chemical Growth', ar:'نمو القطاع الكيميائي',  h:[38,50,60,72,84,100] }
+    pharma:   { en:'Pharma Growth — MENA',   ar:'نمو قطاع الأدوية في المنطقة',       h:[6,11,22,40,62,100] },
+    food:     { en:'F&B Growth — MENA',       ar:'نمو قطاع الغذاء في المنطقة',         h:[25,35,48,62,78,100] },
+    chemical: { en:'Chemical Growth — MENA',  ar:'نمو القطاع الكيميائي في المنطقة',    h:[18,28,42,58,76,100] }
+  };
+
+  const lineEls = {
+    pharma:   document.getElementById('scl-p'),
+    food:     document.getElementById('scl-f'),
+    chemical: document.getElementById('scl-c'),
   };
 
   /* Build bars once */
@@ -160,18 +188,26 @@ document.addEventListener('langchange', ({ detail: { lang } }) => {
       bar.classList.toggle('story-bar-active', i === bars.length - 1);
     });
     chips.forEach(c => c.classList.toggle('story-chip-active', c.dataset.industry === key));
+    Object.entries(lineEls).forEach(([k, el]) => {
+      if (!el) return;
+      el.classList.remove('scl-iline-active');
+      el.classList.toggle('scl-iline-active', k === key);
+    });
   }
 
   function deactivate() {
     chips.forEach(c => c.classList.remove('story-chip-active'));
     bars.forEach(bar => { bar.style.height = '0%'; });
     if (label) label.textContent = '';
+    Object.values(lineEls).forEach(el => el?.classList.remove('scl-iline-active'));
   }
+
+  /* Default: show pharma on load */
+  setTimeout(() => activate('pharma'), 300);
 
   const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
 
   if (isTouch) {
-    /* On touch devices: tap to toggle */
     chips.forEach(chip => {
       chip.addEventListener('click', () => {
         const already = chip.classList.contains('story-chip-active');
@@ -180,10 +216,9 @@ document.addEventListener('langchange', ({ detail: { lang } }) => {
       });
     });
   } else {
-    /* On desktop: hover to show */
     chips.forEach(chip => {
       chip.addEventListener('mouseenter', () => activate(chip.dataset.industry));
-      chip.addEventListener('mouseleave', deactivate);
+      chip.addEventListener('mouseleave', () => activate('pharma'));
     });
   }
 })();
@@ -216,6 +251,33 @@ document.addEventListener('langchange', ({ detail: { lang } }) => {
   }, { threshold: 0.5 });
 
   document.querySelectorAll('.stat-item').forEach(el => statObs.observe(el));
+})();
+
+/* ─── VISIT COUNTER (index.html) ────────────────────────── */
+(function initVisitCounter() {
+  const el = document.getElementById('visit-counter');
+  if (!el) return;
+
+  const alreadyCounted = sessionStorage.getItem('etta_visit_counted');
+  const method = alreadyCounted ? 'GET' : 'POST';
+
+  fetch('https://ettasystems.com/counter.php', { method })
+    .then(r => r.json())
+    .then(data => {
+      if (!alreadyCounted) sessionStorage.setItem('etta_visit_counted', '1');
+      const target = data.count || 0;
+      const duration = 1600;
+      const start = performance.now();
+      const tick = now => {
+        const p = Math.min((now - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - p, 3);
+        el.textContent = Math.floor(eased * target).toLocaleString();
+        if (p < 1) requestAnimationFrame(tick);
+        else el.textContent = target.toLocaleString();
+      };
+      requestAnimationFrame(tick);
+    })
+    .catch(() => { el.textContent = '—'; });
 })();
 
 /* ─── INIT PLACEHOLDERS ─────────────────────────────────── */

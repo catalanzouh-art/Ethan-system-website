@@ -300,17 +300,13 @@ input, textarea, select { font-family: inherit; font-size: 1rem; }
 }
 
 .hero-illustration-img {
-  width: 100%;
-  max-width: 760px;
+  width: 80%;
+  max-width: 580px;
   object-fit: contain;
-  /* mix-blend-mode: screen makes the dark gray bg transparent,
-     leaving only the bright white + teal illustration visible */
-  mix-blend-mode: screen;
-  filter: brightness(1.08) contrast(1.05) saturate(1.1);
+  padding: 16px;
   animation: floatIllustration 6s ease-in-out infinite;
   position: relative;
   z-index: 1;
-  drop-shadow: 0 0 60px rgba(22,181,166,.4);
 }
 
 @keyframes floatIllustration {
@@ -999,27 +995,26 @@ body.ar .scroll-top { right:auto; left:32px; }
 .hpc-chip svg { width: 10px; height: 10px; }
 
 /* Industry chart panels */
-.hpc-panel { display: none; }
-.hpc-panel.hpc-panel-active { display: block; animation: hpcFadeIn .35s ease; }
-@keyframes hpcFadeIn {
-  from { opacity: 0; transform: translateY(3px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
 /* Chart */
 .hpc-chart { padding: 18px 26px 14px; position: relative; }
 .hpc-chart-title { font-size: .7rem; font-weight: 700; color: var(--gray-mid); text-transform: uppercase; letter-spacing: .07em; margin-bottom: 14px; }
+.hpc-chart-body { position: relative; }
 .hpc-bars { display: flex; align-items: flex-end; gap: 8px; height: 60px; position: relative; z-index: 1; }
 .hpc-bar {
-  flex: 1; height: var(--bh);
+  flex: 1;
   background: linear-gradient(180deg, rgba(22,181,166,.18), rgba(22,181,166,.04));
   border-radius: 5px 5px 0 0; border-top: 2px solid rgba(22,181,166,.25);
+  transition: height .65s cubic-bezier(.4,0,.2,1);
 }
 .hpc-bar-active { background: linear-gradient(180deg, var(--teal), rgba(22,181,166,.12)); border-top-color: var(--teal); }
-.hpc-line {
-  position: absolute; left: 26px; right: 26px; bottom: 20px;
-  width: calc(100% - 52px); height: 60px; pointer-events: none;
+.hpc-lines-svg {
+  position: absolute; left: 0; right: 0; bottom: 0;
+  width: 100%; height: 60px; pointer-events: none; z-index: 2;
 }
+[dir="rtl"] .hpc-lines-svg { transform: scaleX(-1); }
+.hpc-iline { opacity: 0; transition: opacity .35s ease; }
+.hpc-iline-active { opacity: 1; }
+.hpc-iline-dim { opacity: 0; }
 .hpc-stats-strip {
   display: flex; align-items: center;
   padding: 16px 26px;
@@ -1158,16 +1153,17 @@ body.ar .home-svc-num { right: auto; left: 22px; }
 }
 
 .mq-card {
-  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 6px; text-align: center;
   background: var(--gray-light); border: 1.5px solid #eaf0f6;
-  border-radius: 16px; padding: 20px 28px; min-width: 180px;
+  border-radius: 16px; padding: 20px 24px; min-width: 170px;
   text-decoration: none; transition: var(--tr); flex-shrink: 0;
 }
 .mq-card:hover { border-color: var(--teal); background: var(--teal-pale); transform: translateY(-4px); box-shadow: 0 8px 24px rgba(22,181,166,.15); }
-.mq-logo { height: 40px; display: flex; align-items: center; }
-.mq-logo svg { height: 100%; width: auto; }
-.mq-name  { font-size: .85rem; font-weight: 700; color: var(--dark); }
-.mq-origin { font-size: .72rem; color: var(--text-soft); }
+.mq-logo { height: 44px; width: 120px; display: flex; align-items: center; justify-content: center; }
+.mq-logo svg { width: 120px; height: 44px; }
+.mq-name  { font-size: .85rem; font-weight: 700; color: var(--dark); text-align: center; }
+.mq-origin { font-size: .72rem; color: var(--text-soft); text-align: center; }
 
 /* ── Home CTA ── */
 .home-cta-section {
@@ -2234,17 +2230,16 @@ body.ar .ph-auth-badge { right: auto; left: 16px; }
   background: linear-gradient(180deg, var(--teal), rgba(22,181,166,.12));
   border-top-color: var(--teal);
 }
-.story-bar span {
-  position: absolute; bottom: -18px; left: 50%;
-  transform: translateX(-50%);
-  font-size: .6rem; color: var(--gray-mid); white-space: nowrap;
-}
+.story-bar span { display: none; }
 /* Trend line overlaid on bars */
+.story-chart-body { position: relative; }
 .story-chart-line {
-  position: absolute; left: 28px; right: 28px;
-  bottom: 35px; width: calc(100% - 56px); height: 80px;
-  pointer-events: none;
+  position: absolute; left: 0; right: 0; bottom: 0;
+  width: 100%; height: 60px; pointer-events: none; z-index: 2;
 }
+[dir="rtl"] .story-chart-line { transform: scaleX(-1); }
+.scl-iline { opacity: 0; transition: opacity .35s ease; }
+.scl-iline-active { opacity: 1; }
 
 /* Stats strip */
 .story-card-stats {

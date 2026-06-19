@@ -59,7 +59,7 @@
     </div>
     <div class="hero-visual" data-aos="fade-left">
       <div class="hero-illustration-wrap">
-        <img src="images/hero-illustration.png" alt="Smart Industrial Solutions" class="hero-illustration-img" />
+        <img src="images/home/2222 (1).png" alt="Smart Industrial Solutions" class="hero-illustration-img" />
         <div class="hero-illustration-glow"></div>
         <div class="hero-stat-badge">
           <span class="stat-num">25+</span>
@@ -115,6 +115,16 @@
         <span class="home-stat-lbl" data-en="Region Coverage" data-ar="تغطية إقليمية">Region Coverage</span>
       </div>
     </div>
+    <div class="home-stat-divider"></div>
+    <div class="home-stat" data-aos="fade-up" data-aos-delay="320">
+      <div class="home-stat-icon">
+        <svg viewBox="0 0 32 32" fill="none"><circle cx="16" cy="13" r="5" stroke="#16B5A6" stroke-width="1.5" opacity=".4"/><path d="M6 27c0-4.4 4.5-8 10-8s10 3.6 10 8" stroke="#16B5A6" stroke-width="1.5" stroke-linecap="round" opacity=".4"/><circle cx="16" cy="13" r="2" fill="#16B5A6"/></svg>
+      </div>
+      <div>
+        <span class="home-stat-num" id="visit-counter">—</span>
+        <span class="home-stat-lbl" data-en="Website Visits" data-ar="زيارات الموقع">Website Visits</span>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -145,48 +155,31 @@
         </div>
         <!-- Mini chart -->
         <div class="hpc-chart">
-          <div class="hpc-chart-title" id="hpc-chart-label">Pharma Growth</div>
-
-          <!-- Pharma panel -->
-          <div class="hpc-panel hpc-panel-active" id="hpc-pharma">
-            <div class="hpc-bars">
-              <div class="hpc-bar" style="height:30%"></div>
-              <div class="hpc-bar" style="height:45%"></div>
-              <div class="hpc-bar" style="height:58%"></div>
-              <div class="hpc-bar" style="height:70%"></div>
-              <div class="hpc-bar" style="height:82%"></div>
-              <div class="hpc-bar hpc-bar-active" style="height:100%"></div>
-            </div>
-          </div>
-
-          <!-- Food & Beverage panel -->
-          <div class="hpc-panel" id="hpc-food">
-            <div class="hpc-bars">
-              <div class="hpc-bar" style="height:20%"></div>
-              <div class="hpc-bar" style="height:35%"></div>
-              <div class="hpc-bar" style="height:50%"></div>
-              <div class="hpc-bar" style="height:64%"></div>
-              <div class="hpc-bar" style="height:80%"></div>
-              <div class="hpc-bar hpc-bar-active" style="height:100%"></div>
-            </div>
-          </div>
-
-          <!-- Chemical panel -->
-          <div class="hpc-panel" id="hpc-chemical">
-            <div class="hpc-bars">
-              <div class="hpc-bar" style="height:35%"></div>
-              <div class="hpc-bar" style="height:48%"></div>
+          <div class="hpc-chart-title" id="hpc-chart-label">Pharma Growth — MENA</div>
+          <div class="hpc-chart-body">
+            <div class="hpc-bars" id="hpc-bars">
+              <div class="hpc-bar" style="height:6%"></div>
+              <div class="hpc-bar" style="height:11%"></div>
+              <div class="hpc-bar" style="height:22%"></div>
+              <div class="hpc-bar" style="height:40%"></div>
               <div class="hpc-bar" style="height:62%"></div>
-              <div class="hpc-bar" style="height:75%"></div>
-              <div class="hpc-bar" style="height:87%"></div>
               <div class="hpc-bar hpc-bar-active" style="height:100%"></div>
             </div>
+            <svg class="hpc-lines-svg" viewBox="0 0 260 60" fill="none" preserveAspectRatio="none">
+              <!-- Pharma: $3B→$55B MENA — slow start, sharp rise post-2009 -->
+              <path id="hpc-lp" class="hpc-iline hpc-iline-active"
+                d="M0 56 C17 56,35 55,52 53 C69 51,87 49,104 47 C121 43,139 38,156 36 C173 30,191 24,208 23 C225 15,243 8,260 0"
+                stroke="#16B5A6" stroke-width="2.2" stroke-linecap="round"/>
+              <!-- F&B: mature steady market, consistently growing -->
+              <path id="hpc-lf" class="hpc-iline hpc-iline-dim"
+                d="M0 45 C17 43,35 41,52 39 C69 37,87 34,104 31 C121 28,139 25,156 23 C173 20,191 16,208 13 C225 9,243 4,260 0"
+                stroke="#4CC789" stroke-width="2.2" stroke-linecap="round"/>
+              <!-- Chemical: petrochemical-driven, steady MENA growth -->
+              <path id="hpc-lc" class="hpc-iline hpc-iline-dim"
+                d="M0 49 C17 47,35 45,52 43 C69 41,87 38,104 35 C121 31,139 27,156 25 C173 22,191 17,208 14 C225 10,243 5,260 0"
+                stroke="#38c4e8" stroke-width="2.2" stroke-linecap="round"/>
+            </svg>
           </div>
-
-          <svg class="hpc-line" viewBox="0 0 260 60" fill="none" preserveAspectRatio="none">
-            <path d="M0 58 C40 50,70 46,110 38 C150 30,190 22,260 6" stroke="url(#hpcGrad)" stroke-width="2.5" stroke-linecap="round" fill="none"/>
-            <defs><linearGradient id="hpcGrad" x1="0" y1="0" x2="260" y2="0" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#4CC789" stop-opacity=".5"/><stop offset="100%" stop-color="#16B5A6"/></linearGradient></defs>
-          </svg>
         </div>
         <div class="hpc-stats-strip">
           <div class="hpc-s"><span>25+</span><label data-en="Years" data-ar="سنة">Years</label></div>
@@ -199,7 +192,7 @@
       <!-- Floating badge -->
       <div class="hpc-float-badge" data-aos="fade-up" data-aos-delay="200">
         <svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" fill="#16B5A6"/><path d="M5 8l2 2 4-4" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        <span data-en="Authorized Distributor" data-ar="موزع معتمد">Authorized Distributor</span>
+        <span data-en="MENA" data-ar="MENA">MENA</span>
       </div>
     </div>
 
@@ -376,53 +369,53 @@
     <div class="marquee-track">
       <!-- Set 1 -->
       <a href="partners.html" class="mq-card">
-        <div class="mq-logo"><svg viewBox="0 0 100 40" fill="none"><text x="50" y="28" text-anchor="middle" fill="#16B5A6" font-size="18" font-weight="800" font-family="Poppins,sans-serif">LinMot</text></svg></div>
+        <div class="mq-logo"><svg viewBox="0 0 120 44" fill="none"><text x="60" y="26" text-anchor="middle" fill="#16B5A6" font-size="14" font-weight="800" font-family="Poppins,sans-serif">LinMot</text></svg></div>
         <span class="mq-name">LinMot</span>
         <span class="mq-origin">🇨🇭 Switzerland</span>
       </a>
       <a href="partners.html" class="mq-card">
-        <div class="mq-logo"><svg viewBox="0 0 100 40" fill="none"><text x="50" y="24" text-anchor="middle" fill="#16B5A6" font-size="13" font-weight="800" font-family="Poppins,sans-serif">ESA</text><text x="50" y="37" text-anchor="middle" fill="#16B5A6" font-size="10" font-weight="600" font-family="Poppins,sans-serif">Automation</text></svg></div>
+        <div class="mq-logo"><svg viewBox="0 0 120 44" fill="none"><text x="60" y="18" text-anchor="middle" fill="#16B5A6" font-size="14" font-weight="800" font-family="Poppins,sans-serif">ESA</text><text x="60" y="33" text-anchor="middle" fill="#16B5A6" font-size="11" font-weight="600" font-family="Poppins,sans-serif">Automation</text></svg></div>
         <span class="mq-name">ESA Automation</span>
         <span class="mq-origin">🇮🇹 Italy</span>
       </a>
       <a href="partners.html" class="mq-card">
-        <div class="mq-logo"><svg viewBox="0 0 100 40" fill="none"><text x="50" y="28" text-anchor="middle" fill="#16B5A6" font-size="20" font-weight="800" font-family="Poppins,sans-serif">igus</text></svg></div>
-        <span class="mq-name">Igus</span>
+        <div class="mq-logo"><svg viewBox="0 0 120 44" fill="none"><text x="60" y="26" text-anchor="middle" fill="#16B5A6" font-size="14" font-weight="800" font-family="Poppins,sans-serif">igus</text></svg></div>
+        <span class="mq-name">igus</span>
         <span class="mq-origin">🇩🇪 Germany</span>
       </a>
       <a href="partners.html" class="mq-card">
-        <div class="mq-logo"><svg viewBox="0 0 100 40" fill="none"><text x="50" y="24" text-anchor="middle" fill="#16B5A6" font-size="13" font-weight="800" font-family="Poppins,sans-serif">Pizzato</text><text x="50" y="37" text-anchor="middle" fill="#16B5A6" font-size="10" font-weight="600" font-family="Poppins,sans-serif">Electrica</text></svg></div>
+        <div class="mq-logo"><svg viewBox="0 0 120 44" fill="none"><text x="60" y="18" text-anchor="middle" fill="#16B5A6" font-size="14" font-weight="800" font-family="Poppins,sans-serif">Pizzato</text><text x="60" y="33" text-anchor="middle" fill="#16B5A6" font-size="11" font-weight="600" font-family="Poppins,sans-serif">Electrica</text></svg></div>
         <span class="mq-name">Pizzato Electrica</span>
         <span class="mq-origin">🇮🇹 Italy</span>
       </a>
       <a href="partners.html" class="mq-card">
-        <div class="mq-logo"><svg viewBox="0 0 100 40" fill="none"><text x="50" y="24" text-anchor="middle" fill="#16B5A6" font-size="13" font-weight="800" font-family="Poppins,sans-serif">Givi</text><text x="50" y="37" text-anchor="middle" fill="#16B5A6" font-size="10" font-weight="600" font-family="Poppins,sans-serif">Misure</text></svg></div>
+        <div class="mq-logo"><svg viewBox="0 0 120 44" fill="none"><text x="60" y="18" text-anchor="middle" fill="#16B5A6" font-size="14" font-weight="800" font-family="Poppins,sans-serif">Givi</text><text x="60" y="33" text-anchor="middle" fill="#16B5A6" font-size="11" font-weight="600" font-family="Poppins,sans-serif">Misure</text></svg></div>
         <span class="mq-name">Givi Misure</span>
         <span class="mq-origin">🇮🇹 Italy</span>
       </a>
       <!-- Set 2 (duplicate for loop) -->
       <a href="partners.html" class="mq-card">
-        <div class="mq-logo"><svg viewBox="0 0 100 40" fill="none"><text x="50" y="28" text-anchor="middle" fill="#16B5A6" font-size="18" font-weight="800" font-family="Poppins,sans-serif">LinMot</text></svg></div>
+        <div class="mq-logo"><svg viewBox="0 0 120 44" fill="none"><text x="60" y="26" text-anchor="middle" fill="#16B5A6" font-size="14" font-weight="800" font-family="Poppins,sans-serif">LinMot</text></svg></div>
         <span class="mq-name">LinMot</span>
         <span class="mq-origin">🇨🇭 Switzerland</span>
       </a>
       <a href="partners.html" class="mq-card">
-        <div class="mq-logo"><svg viewBox="0 0 100 40" fill="none"><text x="50" y="24" text-anchor="middle" fill="#16B5A6" font-size="13" font-weight="800" font-family="Poppins,sans-serif">ESA</text><text x="50" y="37" text-anchor="middle" fill="#16B5A6" font-size="10" font-weight="600" font-family="Poppins,sans-serif">Automation</text></svg></div>
+        <div class="mq-logo"><svg viewBox="0 0 120 44" fill="none"><text x="60" y="18" text-anchor="middle" fill="#16B5A6" font-size="14" font-weight="800" font-family="Poppins,sans-serif">ESA</text><text x="60" y="33" text-anchor="middle" fill="#16B5A6" font-size="11" font-weight="600" font-family="Poppins,sans-serif">Automation</text></svg></div>
         <span class="mq-name">ESA Automation</span>
         <span class="mq-origin">🇮🇹 Italy</span>
       </a>
       <a href="partners.html" class="mq-card">
-        <div class="mq-logo"><svg viewBox="0 0 100 40" fill="none"><text x="50" y="28" text-anchor="middle" fill="#16B5A6" font-size="20" font-weight="800" font-family="Poppins,sans-serif">igus</text></svg></div>
-        <span class="mq-name">Igus</span>
+        <div class="mq-logo"><svg viewBox="0 0 120 44" fill="none"><text x="60" y="26" text-anchor="middle" fill="#16B5A6" font-size="14" font-weight="800" font-family="Poppins,sans-serif">igus</text></svg></div>
+        <span class="mq-name">igus</span>
         <span class="mq-origin">🇩🇪 Germany</span>
       </a>
       <a href="partners.html" class="mq-card">
-        <div class="mq-logo"><svg viewBox="0 0 100 40" fill="none"><text x="50" y="24" text-anchor="middle" fill="#16B5A6" font-size="13" font-weight="800" font-family="Poppins,sans-serif">Pizzato</text><text x="50" y="37" text-anchor="middle" fill="#16B5A6" font-size="10" font-weight="600" font-family="Poppins,sans-serif">Electrica</text></svg></div>
+        <div class="mq-logo"><svg viewBox="0 0 120 44" fill="none"><text x="60" y="18" text-anchor="middle" fill="#16B5A6" font-size="14" font-weight="800" font-family="Poppins,sans-serif">Pizzato</text><text x="60" y="33" text-anchor="middle" fill="#16B5A6" font-size="11" font-weight="600" font-family="Poppins,sans-serif">Electrica</text></svg></div>
         <span class="mq-name">Pizzato Electrica</span>
         <span class="mq-origin">🇮🇹 Italy</span>
       </a>
       <a href="partners.html" class="mq-card">
-        <div class="mq-logo"><svg viewBox="0 0 100 40" fill="none"><text x="50" y="24" text-anchor="middle" fill="#16B5A6" font-size="13" font-weight="800" font-family="Poppins,sans-serif">Givi</text><text x="50" y="37" text-anchor="middle" fill="#16B5A6" font-size="10" font-weight="600" font-family="Poppins,sans-serif">Misure</text></svg></div>
+        <div class="mq-logo"><svg viewBox="0 0 120 44" fill="none"><text x="60" y="18" text-anchor="middle" fill="#16B5A6" font-size="14" font-weight="800" font-family="Poppins,sans-serif">Givi</text><text x="60" y="33" text-anchor="middle" fill="#16B5A6" font-size="11" font-weight="600" font-family="Poppins,sans-serif">Misure</text></svg></div>
         <span class="mq-name">Givi Misure</span>
         <span class="mq-origin">🇮🇹 Italy</span>
       </a>

@@ -210,18 +210,21 @@
 
         <!-- Growth chart -->
         <div class="story-chart">
-          <div class="story-chart-label" id="chart-label" data-en="Pharma Growth" data-ar="نمو القطاع الدوائي">Pharma Growth</div>
-          <div class="story-chart-bars" id="industry-bars"></div>
-          <svg class="story-chart-line" viewBox="0 0 300 80" fill="none">
-            <path d="M0 72 C50 60, 80 55, 120 45 C160 35, 200 28, 250 15 L300 8"
-                  stroke="url(#lineGrad)" stroke-width="2.5" stroke-linecap="round" fill="none"/>
-            <defs>
-              <linearGradient id="lineGrad" x1="0" y1="0" x2="300" y2="0" gradientUnits="userSpaceOnUse">
-                <stop offset="0%"   stop-color="#4CC789" stop-opacity=".4"/>
-                <stop offset="100%" stop-color="#16B5A6"/>
-              </linearGradient>
-            </defs>
-          </svg>
+          <div class="story-chart-label" id="chart-label" data-en="Pharma Growth — MENA" data-ar="نمو قطاع الأدوية في المنطقة">Pharma Growth — MENA</div>
+          <div class="story-chart-body">
+            <div class="story-chart-bars" id="industry-bars"></div>
+            <svg class="story-chart-line" viewBox="0 0 300 60" fill="none" preserveAspectRatio="none">
+              <path id="scl-p" class="scl-iline scl-iline-active"
+                d="M0 56 C20 55,40 54,60 53 C80 52,100 49,120 47 C140 45,160 40,180 36 C200 32,220 27,240 23 C260 19,280 9,300 0"
+                stroke="#16B5A6" stroke-width="2.2" stroke-linecap="round"/>
+              <path id="scl-f" class="scl-iline"
+                d="M0 45 C20 43,40 41,60 39 C80 37,100 34,120 31 C140 28,160 26,180 23 C200 20,220 16,240 13 C260 10,280 5,300 0"
+                stroke="#4CC789" stroke-width="2.2" stroke-linecap="round"/>
+              <path id="scl-c" class="scl-iline"
+                d="M0 49 C20 47,40 45,60 43 C80 41,100 38,120 35 C140 32,160 29,180 25 C200 21,220 17,240 14 C260 11,280 5,300 0"
+                stroke="#38c4e8" stroke-width="2.2" stroke-linecap="round"/>
+            </svg>
+          </div>
         </div>
 
         <!-- Bottom stats strip -->
