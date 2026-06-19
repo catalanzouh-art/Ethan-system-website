@@ -132,8 +132,6 @@ function emailFooter(): string
         <td style="background:#0f2d4a;padding:28px 40px;text-align:center;">
           <p style="margin:0 0 10px;color:rgba(255,255,255,.55);font-size:12px;letter-spacing:.5px;text-transform:uppercase;">Etta Systems</p>
           <p style="margin:0 0 14px;color:rgba(255,255,255,.7);font-size:13px;">Damascus, Syria &nbsp;&bull;&nbsp;
-            <a href="mailto:support@ettasystems.com" style="color:' . $TEAL . ';text-decoration:none;">support@ettasystems.com</a>
-            &nbsp;&bull;&nbsp;
             <a href="' . $BASE . '" style="color:' . $TEAL . ';text-decoration:none;">ettasystems.com</a>
           </p>
           <p style="margin:0;color:rgba(255,255,255,.35);font-size:11px;">&copy; ' . date('Y') . ' Etta Systems. All rights reserved.</p>
@@ -264,8 +262,6 @@ $htmlToSender = emailWrap(
 
     <p style="margin:0 0 20px;color:#64748b;font-size:13px;line-height:1.6;">
       Need urgent assistance? Contact us directly:<br>
-      <a href="mailto:support@ettasystems.com" style="color:' . $TEAL . ';font-weight:600;text-decoration:none;">support@ettasystems.com</a>
-      &nbsp;&nbsp;&bull;&nbsp;&nbsp;
       <span style="color:#0f2d4a;font-weight:600;">+963 933525517</span>
     </p>
 
