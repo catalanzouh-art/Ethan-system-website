@@ -279,6 +279,10 @@ input, textarea, select { font-family: inherit; font-size: 1rem; }
   font-size: clamp(2.4rem, 5vw, 4rem);
   font-weight: 800; line-height: 1.15; margin-bottom: 22px;
 }
+body.ar .ch-title { gap: 6px; line-height: 1.35; }
+.ch-title-row { display: contents; }
+body.ar .ch-title-row { display: flex; flex-direction: row; gap: 12px; align-items: baseline; }
+body.ar .story-chart-line { transform: scaleX(-1); }
 .line-white { color: rgba(255,255,255,.9); }
 .line-teal  { color: var(--teal); }
 .hero-sub {
@@ -2383,7 +2387,7 @@ body.ar .story-hl:hover { transform: translateX(-4px); border-right-color: var(-
 .ch-title {
   display: flex; flex-direction: column;
   font-size: clamp(2.2rem, 4.5vw, 3.8rem);
-  font-weight: 800; line-height: 1.15;
+  font-weight: 800; line-height: 1.15; gap: 0;
   margin-bottom: 22px;
 }
 .ch-t-white { color: rgba(255,255,255,.93); }

@@ -22,55 +22,68 @@ document.querySelectorAll('.tab-btn').forEach(btn => {
 });
 
 /* ─── CONTACT FORM ──────────────────────────────────────── */
-function handleSubmit(e) {
+const MAILER_URL = 'backend/contact.php';
+
+async function handleSubmit(e) {
   e.preventDefault();
-  const form = e.target;
-  const btn  = form.querySelector('button[type="submit"], .ctp-submit');
-  const isAr = window.ETTA?.isAr?.() || false;
+  const form    = e.target;
+  const btn     = form.querySelector('button[type="submit"], .ctp-submit');
+  const isAr    = window.ETTA?.isAr?.() || false;
+  const success = document.getElementById('form-success');
+  const btnSpan = btn?.querySelector('span') || btn;
 
   if (btn) {
-    const span = btn.querySelector('span') || btn;
-    span.textContent = isAr ? 'جارٍ الإرسال...' : 'Sending…';
+    btnSpan.textContent = isAr ? 'جارٍ الإرسال...' : 'Sending…';
     btn.disabled = true;
   }
 
-  const data = {
-    name:    form.querySelector('#input-name')?.value    || '',
-    email:   form.querySelector('#input-email')?.value   || '',
-    company: form.querySelector('#input-company')?.value || '',
-    phone:   form.querySelector('#input-phone')?.value   || '',
-    subject: form.querySelector('input[name="subject"]:checked')?.value || '',
-    message: form.querySelector('#input-message')?.value || '',
+  const payload = {
+    name:    document.getElementById('input-name')?.value.trim(),
+    email:   document.getElementById('input-email')?.value.trim(),
+    company: document.getElementById('input-company')?.value.trim(),
+    phone:   document.getElementById('input-phone')?.value.trim(),
+    subject: form.querySelector('input[name="subject"]:checked')?.value || 'other',
+    message: document.getElementById('input-message')?.value.trim(),
   };
 
-  fetch('https://ettasystems.com/contact.php', {
-    method:  'POST',
-    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-    body:    JSON.stringify(data),
-  })
-  .then(res => {
-    const success = document.getElementById('form-success');
-    if (res.ok) {
-      if (success) {
-        success.textContent = isAr
-          ? success.dataset.ar || 'شكراً! تم إرسال رسالتك.'
-          : success.dataset.en || 'Thank you! Your message has been sent.';
-        success.classList.add('show');
-        setTimeout(() => success.classList.remove('show'), 6000);
-      }
-      form.reset();
-    } else {
-      alert(isAr ? 'حدث خطأ، حاول مجدداً.' : 'Something went wrong. Please try again.');
+  try {
+    const res = await fetch(MAILER_URL, {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body:    JSON.stringify(payload),
+    });
+
+    if (!res.ok) {
+      const data = await res.json().catch(() => ({}));
+      console.error('Mailer error:', data.error || res.status);
+      throw new Error(data.error || 'Server error');
     }
-  })
-  .catch(() => alert(isAr ? 'تعذر الإرسال، تحقق من اتصالك.' : 'Send failed. Check your connection.'))
-  .finally(() => {
+
+    if (success) {
+      success.textContent = isAr
+        ? success.dataset.ar || 'شكراً! تم إرسال رسالتك. سنتواصل معك خلال ٢٤ ساعة.'
+        : success.dataset.en || 'Thank you! Your message has been sent. We\'ll be in touch within 24 hours.';
+      success.style.color = '';
+      success.classList.add('show');
+    }
+    form.reset();
+    setTimeout(() => success?.classList.remove('show'), 6000);
+
+  } catch {
+    if (success) {
+      success.textContent = isAr
+        ? 'حدث خطأ أثناء الإرسال. يرجى المحاولة مرة أخرى أو مراسلتنا مباشرةً.'
+        : 'Something went wrong. Please try again or email us directly.';
+      success.style.color = '#e53e3e';
+      success.classList.add('show');
+      setTimeout(() => { success.classList.remove('show'); success.style.color = ''; }, 6000);
+    }
+  } finally {
     if (btn) {
-      const span = btn.querySelector('span') || btn;
-      span.textContent = isAr ? 'إرسال الرسالة' : 'Send Message';
+      btnSpan.textContent = isAr ? 'إرسال الرسالة' : 'Send Message';
       btn.disabled = false;
     }
-  });
+  }
 }
 
 /* Re-apply form button label on language change */

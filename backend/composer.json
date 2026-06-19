@@ -1,0 +1,14 @@
+{
+  "name": "etta-systems/mailer",
+  "description": "Email service for Etta Systems contact form",
+  "require": {
+    "php": ">=8.0",
+    "phpmailer/phpmailer": "^6.9",
+    "vlucas/phpdotenv": "^5.6"
+  },
+  "autoload": {
+    "psr-4": {
+      "EttaSystems\\": "src/"
+    }
+  }
+}
